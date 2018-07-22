@@ -5,9 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="main.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <style>
  
 
@@ -38,7 +40,9 @@
 <body>
     
     <center>
-        
+        <div id="app">
+
+       
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -46,11 +50,11 @@
                                 <div class="form-group">
                                     <h3>To Do List</h3>
                                    
-                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Add Task">
+                                        <input type="text" v-model="todo" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Add Task">
 
                                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                                 </div>
-                                <button type="button" class="btn btn-dark">Add Task</button>
+                                <button type="button" v-on:click="addNewTask" class="btn btn-dark">Add Task</button>
                                 <br><br><br><br>
                                 
                         </form>
@@ -59,22 +63,22 @@
                                 <table class="table table-hover">
                                   <thead>
                                     <tr>
-                                      <th>Firstname</th>
-                                      <th>Lastname</th>
+                                      <th>Tasks</th>
+                                      <th>Action</th>
                                   
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    <tr>
-                                      <td>John</td>
-                                      <td>Doe</td>
+                                    <tr v-for="task in tasks">
+                                      <td>{{task.task}}</td>
+                                      <td>
+                                          <a href="#" v-on:click="deleteTask">
+
+                                              <i class="fas fa-trash"></i></td>
+                                          </a>
                                     
                                     </tr>
-                                    <tr>
-                                      <td>Mary</td>
-                                      <td>Moe</td>
-                                  
-                                    </tr>
+                               
                                   
                                   </tbody>
                                 </table>
@@ -84,9 +88,10 @@
             </div>
 
         </div>
+    </div>
     </center>
-
    
-          
+   
+    <script src="js/script.js"> </script>
 </body>
-</html>
+</html> 

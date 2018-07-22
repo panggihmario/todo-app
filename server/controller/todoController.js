@@ -14,6 +14,24 @@ class Controller{
         })
        
     }
+
+    static allTask(req,res){
+        todo.find({})
+        .then(function(allData){
+            res.json(allData)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    }
+
+    static deleteTask(req,res){
+        todo.deleteOne({
+            _id : req.params.id
+        },function(err,data){
+            res.json(data)
+        })
+    }
 }
 
 module.exports = Controller
