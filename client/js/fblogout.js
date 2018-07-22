@@ -1,17 +1,16 @@
 function statusChangeCallback(response) {
     console.log('statusChangeCallback');
     console.log(response);
- 
-    if (response.status === 'connected') {
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status !== 'connected') {
       // Logged into your app and Facebook.
-      localStorage.setItem('token',response.authResponse.accessToken)
-      window.location ="home.html"
+  
+    //   window.location ="http://localhost:8080/"
       testAPI();
-    } else {
-      // The person is not logged into your app or we are unable to tell.
-    //   document.getElementById('status').innerHTML = 'Please log ' +
-    //     'into this app.';
-    }
+    } 
   }
 
   // This function is called when someone finishes with the Login
@@ -32,7 +31,7 @@ function statusChangeCallback(response) {
       version    : 'v2.8' // use graph api version 2.8
     });
 
-
+  
 
     FB.getLoginStatus(function(response) {
       statusChangeCallback(response);
@@ -49,13 +48,14 @@ function statusChangeCallback(response) {
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 
-  
+  // Here we run a very simple test of the Graph API after login is
+  // successful.  See statusChangeCallback() for when this call is made.
   function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
       console.log('Successful login for: ' + response.name);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
+      // document.getElementById('status').innerHTML =
+      //   'Thanks for logging in, ' + response.name + '!';
     });
   }
 
@@ -64,8 +64,8 @@ function statusChangeCallback(response) {
     
     FB.logout(function(response) {
   // user is now logged out
-
-  statusChangeCallback(response);
-        localStorage.clear()
+      window.location = "http://localhost:8080/"
+  // statusChangeCallback(response);
+        localStorage.clear('token')
 });
 }

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -42,39 +43,41 @@
 
 </head>
 <body>
-    
+  <div id="user">
+
+  
     <div class="container">
       <div class="login-form col-md-4 offset-md-4">
         <h2 class="title">Login Here</h2>
-          <form>
+      
             <div class="form-group">
-              <label>Username</label>
-              <input type="text" class="form-control">
+              <label>Email</label>
+              <input type="text" v-model="email" class="form-control">
 
             </div>
             
             <div class="form-group">
                 <label>Password</label>
-                <input type="text" class="form-control">
+                <input type="text" v-model="password" class="form-control">
               </div>
              
                 <label>
-                    <a href="#">create account</a> 
+                    <a href="http://localhost:8080/register.html">create account</a> 
                 </label>
-              <button class="btn btn-primary btn-block">Login</button>
+              <button v-on:click="login" class="btn btn-primary btn-block">Login</button>
               <br>
               <center>
                 <div class="fb-login-button" data-max-rows="1" data-size="large" 
                 data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" 
                 data-use-continue-as="false" scope="public_profile,email" onlogin="checkLoginState();"></div>
               </center>
-          </form>
+        
       </div>
 
     </div>
 
 
-  
+  </div> 
 
 
 
@@ -87,8 +90,9 @@
 
 
 
-
+    <button id="out"  onclick="logout()">logout</button>
 
 <script src="js/fblogin.js"></script>
+<script src="js/user.js"></script>
 </body>
 </html>
