@@ -6,7 +6,9 @@ new Vue({
         name : '',
         email : '',
         password : '',
-        edit: null
+        edit: null,
+        duedate : '',
+        username : ''
     },
     methods :{
         allTask : function(){
@@ -18,7 +20,8 @@ new Vue({
                 }
             })
             .then((data)=>{
-                console.log(data)
+                // console.log(data.data[0].user.name)
+                this.username = data.data[0].user.name
                 this.tasks= data.data
             })
         },
@@ -26,7 +29,8 @@ new Vue({
             var token=localStorage.getItem('token')
            
                 axios.post('http://localhost:3000/task',{
-                    task : this.todo
+                    task : this.todo,
+                    duedate : this.duedate
                 },{
                     headers : {
                         token : token
@@ -63,6 +67,20 @@ new Vue({
                 console.log('edit')
                 this.allTask()
             })
+        },
+        logout : function(){
+            window.location = "http://localhost:8080/"
+                // statusChangeCallback(response);
+                    localStorage.clear()
+            FB.logout(function(response) {
+                // user is now logged out
+                    // if(!response){
+              
+                    // }
+                    window.location = "http://localhost:8080/"
+                // statusChangeCallback(response);
+                    localStorage.clear()
+              });
         }
     },
     created(){

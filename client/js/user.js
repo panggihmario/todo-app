@@ -14,7 +14,7 @@ new Vue({
                 password : this.password
             })
             .then(function(data){
-                console.log(data)
+                // console.log(data)
                 localStorage.setItem('token',data.data.token)
                 window.location ="http://localhost:8080"
                 
@@ -24,7 +24,7 @@ new Vue({
             })
         },
         login : function(){
-            console.log('login')
+            // console.log('login')
             axios.post('http://localhost:3000/users/login',{
                 email : this.email,
                 password : this.password

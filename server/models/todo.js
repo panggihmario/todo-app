@@ -7,6 +7,7 @@ var blogTodo = new Schema({
       ref :  'user'
     },
     task:  String,
+    duedate : String,
     comments: [{ body: String, date: Date }],
     date: { type: Date, default: Date.now },
     hidden: Boolean,

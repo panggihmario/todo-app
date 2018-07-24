@@ -8,7 +8,8 @@ class Controller{
         // console.log(decoded)
         todo.create({
             task : req.body.task,
-            user: decoded.id
+            user: decoded.id,
+            duedate : req.body.duedate
         })
         .then(function(data){
             console.log('success')
@@ -28,6 +29,7 @@ class Controller{
         todo.find({
             user: decoded.id
         })
+        .populate('user')
         .then(function(allData){
             console.log('tes')
             res.json(allData)
