@@ -2,6 +2,7 @@ const user = require('../models/user.js')
 var bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const saltRounds = 10;
+var FB = require('fb');
 
 class Controller{
 
@@ -19,7 +20,7 @@ class Controller{
                     password : hash
                 })
                 .then(function(dataUser){
-                    var token = jwt.sign({id:dataUser._id,name:dataUser.name,email:dataUser.email},"hard")
+                    // var token = jwt.sign({id:dataUser._id,name:dataUser.name,email:dataUser.email},"hard")
                     res.status(200).json({
                         dataUser,token
                     })
@@ -60,6 +61,49 @@ class Controller{
                     res.json('wrong password')
                 }
             }
+        })
+    }
+
+    static getDataFb(req,res){
+        let tokenfb = req.headers.tokenfb
+        // FB.setAccessToken(tokenfb)
+        FB.api('me',{
+            fields : ['id','name','email'],access_token : tokenfb
+        },function(response){
+            // res.json(response)
+            // console.log(response)
+            user.findOne({
+                email : response.email
+            })
+            .then(function(dataFb){
+                if(dataFb){
+                    // console.log(dataFb)
+                    var token = jwt.sign({id:dataFb._id,name:dataFb.name,email:dataFb.email},"easy")
+                    res.status(200).json({token,email :dataFb.email})
+                }else{
+                   
+                    user.create({
+                        name : response.name,
+                        email : response.email,
+                        password : response.id
+                    })
+                    .then(function(data){
+                        var token = jwt.sign({id:data._id,name:data.name,email:data.email},"easy")
+                        res.status(200).json({
+                            data,token
+                        })
+                        console.log(token)
+                    })
+                    .catch((err)=>{
+                        console.log(err)
+                        res.status(500).json({ error: err})
+                    })
+                }
+            })
+            .catch(err=>{
+                console.log(err)
+                res.status(500).json({ error: err})
+            })
         })
     }
 }

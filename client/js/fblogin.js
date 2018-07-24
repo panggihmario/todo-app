@@ -4,13 +4,15 @@ function statusChangeCallback(response) {
  
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
-      localStorage.setItem('token',response.authResponse.accessToken)
-      window.location ="home.html"
+      console.log("uda login nich")
+      let tokenfb = response.authResponse.accessToken
+      localStorage.setItem('tokenfb',tokenfb)
       testAPI();
     } else {
       // The person is not logged into your app or we are unable to tell.
     //   document.getElementById('status').innerHTML = 'Please log ' +
     //     'into this app.';
+    console.log("ini else")
     }
   }
 
@@ -53,9 +55,21 @@ function statusChangeCallback(response) {
   function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
-      console.log('Successful login for: ' + response.name);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
+      // console.log('Successful login for: ' + response.name);
+      // document.getElementById('status').innerHTML =
+      //   'Thanks for logging in, ' + response.name + '!';
+      axios.get('http://localhost:3000/users/loginFb',{
+        headers : {
+          tokenfb : localStorage.getItem('tokenfb')
+        }
+      })
+      .then(function(data){
+        console.log("ini dari server",data)
+        localStorage.setItem('token',data.data.token)
+        window.location ="home.html"
+      })
+
+
     });
   }
 

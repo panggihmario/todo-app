@@ -73,7 +73,7 @@
                                     <tr v-for="task in tasks">
                                       <td>{{task.task}}</td>
                                       <td>
-                                          <a href="#" v-on:click="deleteTask">
+                                          <a href="#" v-on:click="deleteTask(task._id)">
 
                                               <i class="fas fa-trash"></i></td>
                                           </a>
@@ -93,7 +93,7 @@
 
     </center>
    
-    <button id="out"  onclick="logout()">logout</button>
+    <button id="out"  onclick="logout()" v-on:click="logoutUser">logout</button>
     <script src="js/fblogout.js"></script>
     <script src="js/script.js"> </script>
 </body>

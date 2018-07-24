@@ -2,6 +2,10 @@ var mongoose = require('mongoose')
 
 var Schema = mongoose.Schema
 var blogTodo = new Schema({
+    user :{
+      type : Schema.Types.ObjectId,
+      ref :  'user'
+    },
     task:  String,
     comments: [{ body: String, date: Date }],
     date: { type: Date, default: Date.now },

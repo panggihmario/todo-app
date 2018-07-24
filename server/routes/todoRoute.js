@@ -4,8 +4,8 @@ const todoCon = require('../controller/todoController.js')
 var userCon = require("../controller/userController.js")
 
 
-router.post('/task',todoCon.addTask)
-router.get('/alltask',todoCon.allTask)
+router.post('/task',userCon.authentication,todoCon.addTask)
+router.get('/alltask',userCon.authentication,todoCon.allTask)
 router.delete('/delete/:id',todoCon.deleteTask)
 
 

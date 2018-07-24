@@ -1,12 +1,18 @@
 const todo = require('../models/todo.js')
+const jwt = require('jsonwebtoken')
+
 
 class Controller{
     static addTask(req,res){
+        var decoded = jwt.verify(req.headers.token, 'easy')
+        // console.log(decoded)
         todo.create({
-            task : req.body.task
+            task : req.body.task,
+            user: decoded.id
         })
         .then(function(data){
-            console.log(data)
+            console.log('success')
+            // console.log(data)
             res.json(data)
         })
         .catch(err=>{
@@ -16,8 +22,14 @@ class Controller{
     }
 
     static allTask(req,res){
-        todo.find({})
+        // console.log("masuk dong",req.headers)
+        var decoded = jwt.verify(req.headers.token, 'easy')
+        console.log("===================",decoded)
+        todo.find({
+            user: decoded.id
+        })
         .then(function(allData){
+            console.log('tes')
             res.json(allData)
         })
         .catch((err)=>{

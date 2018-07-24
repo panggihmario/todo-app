@@ -10,10 +10,14 @@ new Vue({
     methods :{
         allTask : function(){
            
-            
-            axios.get('http://localhost:3000/alltask')
+            var token=localStorage.getItem('token')
+            axios.get('http://localhost:3000/alltask',{
+                headers : {
+                    token : token
+                }
+            })
             .then((data)=>{
-                // console.log(data)
+                console.log(data)
                 this.tasks= data.data
             })
         },
@@ -24,21 +28,25 @@ new Vue({
                     task : this.todo
                 },{
                     headers : {
-                        authorization : token
+                        token : token
                     }
                 })
                 .then((data)=>{
                     console.log(data)
+                    this.allTask()
+                    this.todo=''
                 })
          
          
         },
-        deleteTask : function(req,res){
-            axios.get('http://localhost:3000/delete/:id',{
-                _id : req.params.id
+        deleteTask : function(id){
+            console.log(id)
+            axios.delete(`http://localhost:3000/delete/${id}`,{
+                _id : id
             })
             .then((del)=>{
                 console.log('delete')
+                this.allTask()
             })
         }
     },

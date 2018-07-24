@@ -61,11 +61,15 @@ function statusChangeCallback(response) {
 
 
    function logout(){
-    
+    //  statusChangeCallback(response)
+    // console.log(response)
     FB.logout(function(response) {
   // user is now logged out
+      // if(!response){
+
+      // }
       window.location = "http://localhost:8080/"
   // statusChangeCallback(response);
-        localStorage.clear('token')
+    localStorage.clear('token')
 });
 }
