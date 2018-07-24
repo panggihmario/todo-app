@@ -44,6 +44,17 @@ class Controller{
             res.json(data)
         })
     }
+
+    static updateTask(req,res){
+        todo.updateOne({
+            _id : req.params.id
+        },{
+            task : req.body.task
+        })
+        .then(function(data){
+            res.json(data)
+        })
+    }
 }
 
 module.exports = Controller

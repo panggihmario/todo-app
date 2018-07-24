@@ -5,7 +5,8 @@ new Vue({
         todo:'',
         name : '',
         email : '',
-        password : ''
+        password : '',
+        edit: null
     },
     methods :{
         allTask : function(){
@@ -46,6 +47,20 @@ new Vue({
             })
             .then((del)=>{
                 console.log('delete')
+                this.allTask()
+            })
+        },
+        getData : function(data){
+            this.edit = data
+        },
+        editTask : function(id){
+            axios.put(`http://localhost:3000/edit/${id}`,{
+                _id :  id
+            },{
+                task : this.dataTask
+            })
+            .then((data)=>{
+                console.log('edit')
                 this.allTask()
             })
         }
