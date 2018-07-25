@@ -16,7 +16,7 @@ new Vue({
             .then(function(data){
                 // console.log(data)
                 localStorage.setItem('token',data.data.token)
-                window.location ="http://localhost:8080"
+                window.location ="http://localhost:8080/home.html"
                 
             })
             .catch((err)=>{

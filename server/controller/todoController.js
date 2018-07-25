@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 
 class Controller{
     static addTask(req,res){
-        var decoded = jwt.verify(req.headers.token, 'easy')
+        var decoded = jwt.verify(req.headers.token, process.env.secretKey)
         // console.log(decoded)
         todo.create({
             task : req.body.task,
@@ -24,14 +24,15 @@ class Controller{
 
     static allTask(req,res){
         // console.log("masuk dong",req.headers)
-        var decoded = jwt.verify(req.headers.token, 'easy')
+        var decoded = jwt.verify(req.headers.token, process.env.secretKey)
         console.log("===================",decoded)
         todo.find({
             user: decoded.id
         })
+        .sort({duedate : "asc"})
         .populate('user')
         .then(function(allData){
-            console.log('tes')
+            // console.log('tes')
             res.json(allData)
         })
         .catch((err)=>{
@@ -51,7 +52,8 @@ class Controller{
         todo.updateOne({
             _id : req.params.id
         },{
-            task : req.body.task
+            task : req.body.task,
+            duedate : req.body.duedate
         })
         .then(function(data){
             res.json(data)

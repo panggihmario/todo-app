@@ -20,7 +20,7 @@ class Controller{
                     password : hash
                 })
                 .then(function(dataUser){
-                    // var token = jwt.sign({id:dataUser._id,name:dataUser.name,email:dataUser.email},"hard")
+                    var token = jwt.sign({id:dataUser._id,name:dataUser.name,email:dataUser.email},process.env.secretKey)
                     res.status(200).json({
                         dataUser,token
                     })
@@ -37,7 +37,7 @@ class Controller{
     }
 
     static authentication(req,res,next){
-        var decoded = jwt.verify(req.headers.token, 'easy')
+        var decoded = jwt.verify(req.headers.token, process.env.secretKey)
         // console.log("===============",decoded)
         if(decoded){
             next()
@@ -53,7 +53,7 @@ class Controller{
         .then(function(dataUser){
             if(dataUser){
                 let checkPassword = bcrypt.compareSync(req.body.password, dataUser.password)
-                var token = jwt.sign({id:dataUser._id,name:dataUser.name,email:dataUser.email},"easy")
+                var token = jwt.sign({id:dataUser._id,name:dataUser.name,email:dataUser.email},process.env.secretKey)
                 if(checkPassword){
                     // res.json(dataUser)
                     res.json(token)
@@ -78,7 +78,7 @@ class Controller{
             .then(function(dataFb){
                 if(dataFb){
                     // console.log(dataFb)
-                    var token = jwt.sign({id:dataFb._id,name:dataFb.name,email:dataFb.email},"easy")
+                    var token = jwt.sign({id:dataFb._id,name:dataFb.name,email:dataFb.email},process.env.secretKey)
                     res.status(200).json({token,email :dataFb.email})
                 }else{
                    
@@ -88,7 +88,7 @@ class Controller{
                         password : response.id
                     })
                     .then(function(data){
-                        var token = jwt.sign({id:data._id,name:data.name,email:data.email},"easy")
+                        var token = jwt.sign({id:data._id,name:data.name,email:data.email},process.env.secretKey)
                         res.status(200).json({
                             data,token
                         })

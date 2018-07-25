@@ -20,6 +20,8 @@ Vue.component('edit-modal', {
             <div class="modal-body">
             
                     <input type="text"   class="form-control"  v-model="dataTask.task" aria-describedby="emailHelp" >
+                    <br><br>
+                    <input type="date" class="form-control-sm" v-model="dataTask.duedate">
             </div>
   
             <!-- Modal footer -->

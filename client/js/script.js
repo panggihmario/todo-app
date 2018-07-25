@@ -69,18 +69,24 @@ new Vue({
             })
         },
         logout : function(){
-            window.location = "http://localhost:8080/"
+            var tokenfb = localStorage.getItem('tokenfb')
+            if(tokenfb){
+                FB.logout(function(response) {
+                    // user is now logged out
+                        // if(!response){
+                  
+                        // }
+                        window.location = "http://localhost:8080/"
+                    // statusChangeCallback(response);
+                        localStorage.clear()
+                  });
+            }else{
+                window.location = "http://localhost:8080/"
                 // statusChangeCallback(response);
                     localStorage.clear()
-            FB.logout(function(response) {
-                // user is now logged out
-                    // if(!response){
-              
-                    // }
-                    window.location = "http://localhost:8080/"
-                // statusChangeCallback(response);
-                    localStorage.clear()
-              });
+            }
+        
+            
         }
     },
     created(){

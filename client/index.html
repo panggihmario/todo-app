@@ -23,18 +23,62 @@
         box-shadow : 0px 0px 10px 1px grey;
         border-radius : 5px;
         padding-bottom: 20px;
-        background : white;
+        background : #948E8E;
         width : 600px !important;
       }
       .title{
-        background: #007bbf;
+        background: black;
         padding: 10px;
         text-align: center;
         color : #fff;
         border-radius: 0px 0px 10px 10px;
       }
-    
-    
+        btn {
+      display: inline-block;
+      font-weight: 400;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      border: 1px solid transparent;
+      padding: .375rem .75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      border-radius: .25rem;
+      transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+      width: 204px;
+      }
+ 
+.btn-primary {
+    color: #fff;
+    background-color: black;
+    border-color: #007bff;
+}
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    width: 251px;
+}
+
+
+
+
     
     </style>
 
@@ -64,9 +108,10 @@
                 <label>
                     <a href="http://localhost:8080/register.html">create account</a> 
                 </label>
-              <button v-on:click="login" class="btn btn-primary btn-block">Login</button>
-              <br>
-              <center>
+                <center>
+              <button v-on:click="login" class="btn btn-primary btn-dark">Login</button>
+              <br><br>
+             
                 <div class="fb-login-button" data-max-rows="1" data-size="large" 
                 data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" 
                 data-use-continue-as="false" scope="public_profile,email" onlogin="checkLoginState();"></div>
@@ -90,7 +135,7 @@
 
 
 
-    <button id="out"  onclick="logout()">logout</button>
+    
 
 <script src="js/fblogin.js"></script>
 <script src="js/user.js"></script>

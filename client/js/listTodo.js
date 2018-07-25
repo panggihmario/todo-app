@@ -15,18 +15,16 @@ Vue.component('list-todo', {
                     </thead>
                     <tbody>
                         <tr v-for="task in tasks">
-                      <td>{{task.task}}</td>
-                      <td>{{task.duedate}}</td>
-                      <td>
-                          <i class="far fa-edit" data-toggle="modal" @click="editTask(task)" data-target="#myModal"></i>
-                      </td>
-                      <td>
-                          <a href="#" v-on:click="deleteTask(task._id)">
-                              <i class="fas fa-trash"></i>
-                              </a>
-                          </td>
-                    </tr>
-                     </tbody>
+                            <td>{{task.task}}</td>
+                            <td>{{task.duedate}}</td>
+                            <td>
+                                <i class="far fa-edit" data-toggle="modal" @click="editTask(task)" data-target="#myModal"></i>
+                            </td>
+                            <td>
+                                <i class="fas fa-trash" v-on:click="deleteTask(task._id)"></i> 
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>`,
   props : ['tasks'],
   methods : {
