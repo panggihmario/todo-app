@@ -6,8 +6,14 @@ var blogTodo = new Schema({
       type : Schema.Types.ObjectId,
       ref :  'user'
     },
-    task:  String,
-    duedate : String,
+    task:  {
+      type : String,
+      required : true
+    },
+    duedate : {
+      type : String,
+      required : true
+    },
     comments: [{ body: String, date: Date }],
     date: { type: Date, default: Date.now },
     hidden: Boolean,
